@@ -72,31 +72,31 @@ fn main() {
     // parse command and args
     // s3
     if let Some(s3) = matches.subcommand_matches("s3") {
-        if let Some(("get", a)) = s3.subcommand() {
-            let name = a.get_one::<String>("name").unwrap();
+        if let Some(("get", args)) = s3.subcommand() {
+            let name = args.get_one::<String>("name").unwrap();
             println!("ok, s3 get name = {}", name);
-            let age = a.get_one::<String>("age").unwrap();
+            let age = args.get_one::<String>("age").unwrap();
             println!("ok, s3 get age = {}", age);
-            let enable = a.get_one::<bool>("enable").unwrap();
+            let enable = args.get_one::<bool>("enable").unwrap();
             println!("ok, s3 enable = {}", enable);
         }
-        if let Some(("list", a)) = s3.subcommand() {
-            let ap = a.get_one::<String>("ap").unwrap();
+        if let Some(("list", args)) = s3.subcommand() {
+            let ap = args.get_one::<String>("ap").unwrap();
             println!("ok, s3 list ap = {}", ap);
         }
     }
 
     // ec2
     if let Some(ec2) = matches.subcommand_matches("ec2") {
-        if let Some(("tag", m)) = ec2.subcommand() {
-            if let Some(("update", a)) = m.subcommand() {
-                let ips = a.get_one::<String>("ips").unwrap();
-                let tags = a.get_one::<String>("tags").unwrap();
+        if let Some(("tag", tag)) = ec2.subcommand() {
+            if let Some(("update", args)) = tag.subcommand() {
+                let ips = args.get_one::<String>("ips").unwrap();
+                let tags = args.get_one::<String>("tags").unwrap();
                 println!("ok, ec2 stg get ips = {}, tags = {}", ips, tags);
             }
 
-            if let Some(("get", a)) = m.subcommand() {
-                let example = a.get_one::<String>("example").unwrap();
+            if let Some(("get", args)) = tag.subcommand() {
+                let example = args.get_one::<String>("example").unwrap();
                 println!("ok, ec2 get example = {}", example);
             }
         }
